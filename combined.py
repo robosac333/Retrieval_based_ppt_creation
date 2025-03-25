@@ -8,6 +8,7 @@ import cv2
 from Chatbot.Mistral_7b import retrieve_faiss, retrieve_context, generate_answer
 from transformers import pipeline, AutoProcessor
 from byaldi import RAGMultiModalModel
+from bedrock_handler import call_claude, call_titan
 
 # Define the path to the dataset directory containing PDF and text files
 data_path = "/nfshomes/sjd3333/Retrieval_based_ppt_creation/pdfs" 
@@ -141,7 +142,7 @@ while True:
     image_context = outputs[0]["generated_text"].split("ASSISTANT:")[1]
     print(f"Image Context: {image_context}")
 
-    answer = generate_answer(text_query, context, image_context=image_context)  # Generate the model's answer
+    answer = call_claude(text_query, context, image_context=image_context)  # Generate the model's answer
 
     response_time = time.time() - start_time  # Calculate how long the response took.
 
