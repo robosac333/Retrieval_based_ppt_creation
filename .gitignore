@@ -1,2 +1,3 @@
 img_output/
-pdfs/.env
+pdfs/
+.env
